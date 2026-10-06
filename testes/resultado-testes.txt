@@ -1,0 +1,66 @@
+Servidor TCP na porta 63738
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63739 NUMERO=0
+Conexão encerrada: view-localhost/127.0.0.1:63741
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=0
+Servidor TCP na porta 63747
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63748 NUMERO=1000
+Conexão encerrada: view-localhost/127.0.0.1:63750
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=1000
+Servidor TCP na porta 63756
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63757 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63759
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63764
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63765 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63767
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63772
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63773 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63775
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63780
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63781 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63783
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63788
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63789 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63791
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63797
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63798 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63800
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63805
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63806 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63808
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63813
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63814 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63816
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63821
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63822 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63824
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63829
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63830 NUMERO=500
+Conexão encerrada: view-localhost/127.0.0.1:63832
+PASSOU: 3 clientes, validação, SAIR, desconexão, acerto simultâneo, anúncio ao cliente parado e conexão tardia; segredo=500
+Servidor TCP na porta 63837
+Cliente processo: Conectado. Digite um número de 0 a 1000 ou SAIR.
+Cliente processo: BEM_VINDO Digite um inteiro de 0 a 1000 ou SAIR
+Cliente processo: Conectado. Digite um número de 0 a 1000 ou SAIR.
+Cliente processo: BEM_VINDO Digite um inteiro de 0 a 1000 ou SAIR
+Cliente processo: Conectado. Digite um número de 0 a 1000 ou SAIR.
+Cliente processo: BEM_VINDO Digite um inteiro de 0 a 1000 ou SAIR
+Cliente processo: MAIOR
+Cliente processo: MENOR
+VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63839 NUMERO=637
+Conexão encerrada: view-localhost/127.0.0.1:63840
+Conexão encerrada: view-localhost/127.0.0.1:63841
+Cliente processo: ACERTOU
+Cliente processo: VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63839 NUMERO=637
+Cliente processo: VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63839 NUMERO=637
+Cliente processo: VENCEDOR IP=127.0.0.1 HOST=view-localhost PORTA=63839 NUMERO=637
+PASSOU: 3 processos Cliente reais; anúncio e saída sem ENTER no cliente parado
+TODOS OS TESTES PASSARAM (13 partidas TCP).
