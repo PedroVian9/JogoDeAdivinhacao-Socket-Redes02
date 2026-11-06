@@ -1,0 +1,10 @@
+out/
+dist/
+testes/
+capturas/
+*.class
+*.log
+*.zip
+.git/
+.gitignore
+README.md

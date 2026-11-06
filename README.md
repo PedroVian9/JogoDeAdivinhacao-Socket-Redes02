@@ -8,7 +8,135 @@ Aplicação cliente-servidor em Java, com sockets TCP, interface de terminal e u
 - Otávio Oliveira Neto
 - Guilherme Maia Facchini
 
-## Requisitos e compilação
+## Execução com Docker (avaliação prática)
+
+O servidor roda em um contêiner Docker; o cliente roda fora dele e se conecta pela porta TCP publicada. Funciona no Linux ou no Windows com WSL 2 e Docker (comandos abaixo em um terminal Bash do Ubuntu/WSL ou Linux, na raiz do projeto).
+
+### Dockerfile
+
+O [Dockerfile](Dockerfile) fica na raiz do projeto e usa dois estágios:
+
+| Instrução | Função |
+| --- | --- |
+| `FROM eclipse-temurin:17-jdk AS build` | Imagem base Java 17 com compilador (estágio de build) |
+| `COPY Servidor.java .` | Copia o código-fonte do servidor para o contêiner |
+| `RUN javac ... -d out Servidor.java` | Compila a aplicação dentro da imagem |
+| `FROM eclipse-temurin:17-jre` | Imagem final só com o runtime Java, menor |
+| `COPY --from=build /app/out ./out` | Copia as classes compiladas do estágio de build |
+| `EXPOSE 5000` | Documenta a porta TCP usada pelo servidor |
+| `ENTRYPOINT ["java", "-cp", "out", "Servidor"]` + `CMD ["5000"]` | Inicia o servidor automaticamente na porta 5000 |
+
+O `.dockerignore` evita enviar para o build arquivos desnecessários (`out/`, testes, `.git`, capturas).
+
+### 1. Construir a imagem
+
+```bash
+docker build -t jogo-adivinhacao-grupo-pedro-otavio-guilherme:1.0 .
+```
+
+- `-t` dá nome e versão (tag) à imagem, identificando o jogo e o grupo.
+- `.` indica que o contexto de build (e o Dockerfile) é o diretório atual.
+
+Conferir a imagem criada:
+
+```bash
+docker images jogo-adivinhacao-grupo-pedro-otavio-guilherme
+```
+
+### 2. Executar o servidor no contêiner
+
+```bash
+docker run -d --name jogo-adivinhacao-servidor -p 5000:5000 jogo-adivinhacao-grupo-pedro-otavio-guilherme:1.0
+```
+
+- `-d` executa em segundo plano.
+- `--name` dá um nome ao contêiner.
+- `-p 5000:5000` publica a porta 5000 do contêiner na porta 5000 da máquina hospedeira.
+
+Conferir se está em execução e ver a saída do servidor:
+
+```bash
+docker ps
+docker logs -f jogo-adivinhacao-servidor
+```
+
+O log deve mostrar `Servidor TCP na porta 5000`. Ao fim da partida, mostra a linha `VENCEDOR ...`.
+
+### 3. Executar o cliente (fora do contêiner)
+
+Com o JDK 17 instalado na máquina hospedeira:
+
+```bash
+javac -encoding UTF-8 --release 17 -d out Cliente.java
+java -cp out Cliente localhost 5000
+```
+
+Abra quantos terminais quiser com clientes. Para jogar a partir de outra máquina, troque `localhost` pelo IP da máquina que roda o Docker.
+
+Sem JDK na máquina hospedeira, o cliente também pode rodar em um contêiner separado, conectando ao servidor pela porta publicada no host:
+
+```bash
+docker run --rm -it -v "$PWD":/src -w /src eclipse-temurin:17-jdk \
+  sh -c "javac -d /tmp/out Cliente.java && java -cp /tmp/out Cliente host.docker.internal 5000"
+```
+
+(No Linux sem Docker Desktop, acrescente `--add-host=host.docker.internal:host-gateway`.)
+
+Como o Docker faz NAT da porta publicada, o IP do vencedor mostrado pelo servidor é o do gateway da rede Docker (por exemplo, `172.17.0.1`), e não o IP real do cliente.
+
+### 4. Nova partida e encerramento
+
+O servidor sorteia o número ao iniciar. Para uma nova partida, reinicie o contêiner:
+
+```bash
+docker restart jogo-adivinhacao-servidor
+```
+
+Para parar e remover o contêiner (e, se quiser, a imagem):
+
+```bash
+docker stop jogo-adivinhacao-servidor
+docker rm jogo-adivinhacao-servidor
+docker rmi jogo-adivinhacao-grupo-pedro-otavio-guilherme:1.0
+```
+
+### Exemplo de execução verificada
+
+Partida jogada contra o servidor no contêiner, com palpites por busca binária:
+
+```text
+<- BEM_VINDO Digite um inteiro de 0 a 1000 ou SAIR
+-> 500  <- MAIOR
+-> 750  <- MENOR
+-> 625  <- MAIOR
+-> 687  <- MENOR
+-> 656  <- MAIOR
+-> 671  <- MAIOR
+-> 679  <- MAIOR
+-> 683  <- MENOR
+-> 681  <- ACERTOU
+<- VENCEDOR IP=172.17.0.1 HOST=172.17.0.1 PORTA=38130 NUMERO=681
+```
+
+`docker logs jogo-adivinhacao-servidor`:
+
+```text
+Servidor TCP na porta 5000
+VENCEDOR IP=172.17.0.1 HOST=172.17.0.1 PORTA=38130 NUMERO=681
+```
+
+### Capturas de tela
+
+As capturas ficam na pasta [capturas/](capturas/):
+
+1. `docker build` concluído e `docker images` mostrando a imagem.
+2. `docker ps` com o contêiner em execução e a porta `0.0.0.0:5000->5000/tcp`.
+3. Cliente conectado, enviando palpites e recebendo `MAIOR`/`MENOR` até `ACERTOU`.
+4. `docker logs` do servidor mostrando o vencedor.
+
+## Execução sem Docker
+
+### Requisitos e compilação
 
 Instale um **JDK 17 ou superior**, com `java` e `javac` no PATH. Não são necessárias bibliotecas externas, Maven ou Gradle.
 
@@ -18,7 +146,7 @@ No diretório do projeto:
 javac -encoding UTF-8 --release 17 -d out Servidor.java Cliente.java
 ```
 
-## Execução
+### Execução
 
 Inicie o servidor em um terminal:
 
@@ -108,6 +236,8 @@ Para a apresentação, capture os terminais do servidor e dos três clientes dur
 - `Cliente.java`: conexão, envio pelo teclado e recepção independente.
 - `testes/TesteIntegracao.java`: testes de integração sem dependências.
 - `testes/resultado-testes.txt`: registro dos testes executados.
+- `Dockerfile` e `.dockerignore`: imagem Docker do servidor.
+- `capturas/`: capturas de tela da execução no Docker.
 - `README.md`: integrantes e instruções.
 
 Entrega pelo repositório GitHub: [JogoDeAdivinhacao-Socket-Redes02](https://github.com/PedroVian9/JogoDeAdivinhacao-Socket-Redes02). O repositório deve estar acessível ao professor. Os arquivos compilados em `out` não são necessários na entrega.
