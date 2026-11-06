@@ -26,7 +26,7 @@ public final class Cliente {
             }
             jogar(endereco, porta);
         } catch (IOException | IllegalArgumentException e) {
-            System.err.println("Falha na conexão: " + e.getMessage());
+            System.err.println("Falha na conexao: " + e.getMessage());
         }
     }
 
@@ -83,14 +83,14 @@ public final class Cliente {
                             }
                         }
                     } catch (IOException e) {
-                        System.err.println("Recepção interrompida: " + e.getMessage());
+                        System.err.println("Recepcao interrompida: " + e.getMessage());
                     } finally {
                         encerrado.set(true);
-                        System.out.println("Conexão encerrada.");
+                        System.out.println("Conexao encerrada.");
                     }
                 }, "receptor");
 
-                System.out.println("Conectado. Digite um número de 0 a 1000 ou SAIR.");
+                System.out.println("Conectado. Digite um numero de 0 a 1000 ou SAIR.");
                 receptor.start();
                 teclado.start();
                 try {

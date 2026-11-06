@@ -28,7 +28,7 @@ public final class Servidor implements AutoCloseable {
     // Somente os testes usam um segredo conhecido; a execução normal sempre sorteia.
     Servidor(int porta, int segredo) throws IOException {
         if (segredo < 0 || segredo > 1000) {
-            throw new IllegalArgumentException("Número secreto fora do intervalo.");
+            throw new IllegalArgumentException("Numero secreto fora do intervalo.");
         }
         numeroSecreto = segredo;
         escuta = new ServerSocket(porta);
@@ -92,7 +92,7 @@ public final class Servidor implements AutoCloseable {
             try {
                 socket.close();
             } catch (IOException e) {
-                System.err.println("Não foi possível fechar uma conexão: " + e.getMessage());
+                System.err.println("Nao foi possivel fechar uma conexao: " + e.getMessage());
             }
         }
 
@@ -162,7 +162,7 @@ public final class Servidor implements AutoCloseable {
                     }
                 }
             } catch (IOException e) {
-                System.out.println("Conexão encerrada: " + socket.getRemoteSocketAddress());
+                System.out.println("Conexao encerrada: " + socket.getRemoteSocketAddress());
             } finally {
                 synchronized (trava) {
                     jogadores.remove(this);
@@ -185,7 +185,7 @@ public final class Servidor implements AutoCloseable {
                 servidor.executar();
             }
         } catch (IOException | IllegalArgumentException e) {
-            System.err.println("Não foi possível iniciar o servidor: " + e.getMessage());
+            System.err.println("Nao foi possivel iniciar o servidor: " + e.getMessage());
         }
     }
 }

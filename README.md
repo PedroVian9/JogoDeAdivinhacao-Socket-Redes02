@@ -129,10 +129,10 @@ VENCEDOR IP=172.17.0.1 HOST=172.17.0.1 PORTA=38130 NUMERO=681
 
 As capturas ficam na pasta [capturas/](capturas/):
 
-1. `docker build` concluído e `docker images` mostrando a imagem.
-2. `docker ps` com o contêiner em execução e a porta `0.0.0.0:5000->5000/tcp`.
-3. Cliente conectado, enviando palpites e recebendo `MAIOR`/`MENOR` até `ACERTOU`.
-4. `docker logs` do servidor mostrando o vencedor.
+1. [01-docker-build-e-images.png](capturas/01-docker-build-e-images.png): `docker build` concluído (com o `javac` rodando na imagem) e `docker images` mostrando a imagem.
+2. [02-docker-run-e-ps.png](capturas/02-docker-run-e-ps.png): `docker run` e `docker ps` com o contêiner em execução e a porta `0.0.0.0:5000->5000/tcp`.
+3. [03-cliente-jogando.png](capturas/03-cliente-jogando.png): `Cliente` Java fora do contêiner do servidor, enviando palpites e recebendo `MAIOR`/`MENOR` até `ACERTOU` e o anúncio `VENCEDOR`. Os palpites foram digitados por um programa auxiliar que faz busca binária.
+4. [04-docker-logs-servidor.png](capturas/04-docker-logs-servidor.png): `docker logs` do servidor com o vencedor (duas partidas, pois o contêiner foi reiniciado entre elas).
 
 ## Execução sem Docker
 
